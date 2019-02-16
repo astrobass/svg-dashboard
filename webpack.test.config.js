@@ -1,13 +1,17 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/svgdash.js',
+  entry: './test/test.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'svgdash.js'
+    path: path.resolve(__dirname, 'test'),
+    filename: 'test-bundle.js'
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules', path.resolve(__dirname, 'dist')]
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist')
+    contentBase: path.join(__dirname, 'test')
   }
   /*,
   module: {

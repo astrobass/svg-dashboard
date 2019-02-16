@@ -1,4 +1,4 @@
-function DialFullBasic(options) {
+function DialFullBasic(element, optionsString) {
   const strokeWidth = 2;
   const needleWidth = 6;
   const markerWidth = 3;
@@ -22,7 +22,6 @@ function DialFullBasic(options) {
   const startTy = height / 2;
   const paths = [];
   const needleString = `M ${(width / 2)} ${(height / 2 + needleWidth / 2)} L${(width / 2)} ${(height / 2 - needleWidth / 2)} L${(width / 2 - middleRadius)} ${height / 2}z`;
-  const element = options.containerId;
   const document = element.ownerDocument;
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   const svgNS = svg.namespaceURI;
@@ -32,6 +31,7 @@ function DialFullBasic(options) {
   const g = document.createElementNS(svgNS, 'g');
   const texts = [];
   const textNodes = [];
+  const options = JSON.parse(optionsString);
   const min = options.minValue || 0;
   const max = options.maxValue || 100;
   const middleCircleFillColor = options.backgroundColor || '#2a2a2a';

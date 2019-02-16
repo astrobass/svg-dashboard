@@ -1,4 +1,5 @@
-function DialFullBasic(options) {
+function DialFullBasic(element, optionsString) {
+  const options = JSON.parse(optionsString);
   const range = options.range || [0, 100];
   const angleRange = options.angleRange || [0, 360];
   const backgroundColor = options.backgroundColor || [200, 200, 200];
@@ -27,7 +28,6 @@ function DialFullBasic(options) {
   const startTx = (width - textRadius * 2) / 2;
   const startTy = height / 2;
   const markers = [];
-  const element = options.containerId;
   const document = element.ownerDocument;
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   const svgNS = svg.namespaceURI;
