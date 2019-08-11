@@ -24,8 +24,45 @@ dials[1] = new DialHalfBasic({
   'normalColor': '#114411',
   'warningColor': 'darkred'
 });
+
+dials[2] = new DialFullBasic({
+  'containerId': document.getElementById('dial3-div'),
+  'minValue': 0,
+  'maxValue': 120,
+  'backgroundColor': 'darkblue',
+  'trimColor': 'darkred',
+  'needleColor': 'darkred',
+  'markerBackgroundColor': '#333333',
+  'normalColor': 'green',
+  'warningColor': 'red'
+});
+
+dials[3] = new DialFullBasic({
+  'containerId': document.getElementById('dial4-div'),
+  'minValue': 0,
+  'maxValue': 120,
+  'backgroundColor': 'darkblue',
+  'trimColor': 'darkred',
+  'needleColor': 'darkred',
+  'markerBackgroundColor': '#333333',
+  'normalColor': 'green',
+  'warningColor': 'red'
+});
+
+dials[4] = new DialFullBeamer({
+  'containerId': document.getElementById('dial5-div'),
+  'range': [0, 120],
+  'angleRange': [-30, 210],
+  'backgroundColor': [20, 20, 20],
+  'foregroundColor': [150, 150, 255],
+  'brightness': 0.9,
+  'diameter': 400
+});
 values[0] = 0;
 values[1] = 0;
+values[2] = 0;
+values[3] = 0;
+values[4] = 0;
 
 setInterval(function() {
   for (let i = 0; i < dials.length; i += 1 ) {

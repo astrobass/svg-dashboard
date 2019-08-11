@@ -1,46 +1,46 @@
-function DialFullBasic(element, optionsString) {
-  const strokeWidth = 2;
-  const needleWidth = 6;
-  const markerWidth = 3;
-  const numMarkers = 61;
-  const redMarkers = Math.floor(numMarkers * 0.8);
-  const noColor = '#cdcdcd';
-  const width = 300;
-  const height = width;
-  const outerRadius = width / 2 * 0.95;
-  const middleRadius = width / 2 * 0.75;
-  const innerRadius = width / 2 * 0.25;
-  const markerRadius = middleRadius * 1.07;
-  const markerRadiusMajor = middleRadius * 1.20;
-  const markerRadiusMinor = middleRadius * 1.13;
-  const textRadius = middleRadius * 0.9;
-  const startMx = (width - markerRadius * 2) / 2;
-  const startLx = (width - markerRadiusMajor * 2) / 2;
-  const startLMinorx = (width - markerRadiusMinor * 2) / 2;
-  const startY = height / 2;
-  const startTx = (width - textRadius * 2) / 2;
-  const startTy = height / 2;
-  const paths = [];
-  const needleString = `M ${(width / 2)} ${(height / 2 + needleWidth / 2)} L${(width / 2)} ${(height / 2 - needleWidth / 2)} L${(width / 2 - middleRadius)} ${height / 2}z`;
-  const document = element.ownerDocument;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  const svgNS = svg.namespaceURI;
-  const needle = document.createElementNS(svgNS, 'path');
-  const text = document.createElementNS(svgNS, 'text');
-  const textNode = document.createTextNode('');
-  const g = document.createElementNS(svgNS, 'g');
-  const texts = [];
-  const textNodes = [];
-  const options = JSON.parse(optionsString);
-  const min = options.minValue || 0;
-  const max = options.maxValue || 100;
-  const middleCircleFillColor = options.backgroundColor || '#2a2a2a';
-  const innerCircleFillColor = options.trimColor || '#660000';
-  const circleStrokeColor = options.trimColor || '#660000';
-  const needleColor = options.needleColor || '#da1b27';
-  const markerBackgroundColor = options.markerBackgroundColor || '#2a2a2a';
-  const normalColor = options.normalColor || 'green';
-  const warningColor = options.warningColor || 'red';
+function DialFullBasic(options) {
+  this.strokeWidth = 2;
+  this.needleWidth = 6;
+  this.markerWidth = 3;
+  this.width = 300;
+  this.height = this.width;
+  this.outerRadius = this.width / 2 * 0.95;
+  this.middleRadius = this.width / 2 * 0.75;
+  this.innerRadius = this.width / 2 * 0.25;
+  this.markerRadius = this.middleRadius * 1.07;
+  this.markerRadiusMajor = this.middleRadius * 1.20;
+  this.markerRadiusMinor = this.middleRadius * 1.13;
+  this.textRadius = this.middleRadius * 0.9;
+  this.startMx = (this.width - this.markerRadius * 2) / 2;
+  this.startLx = (this.width - this.markerRadiusMajor * 2) / 2;
+  this.startLMinorx = (this.width - this.markerRadiusMinor * 2) / 2;
+  this.startY = this.height / 2;
+  this.startTx = (this.width - this.textRadius * 2) / 2;
+  this. startTy = this.height / 2;
+  this.needleString = `M ${(this.width / 2)} ${(this.height / 2 + this.needleWidth / 2)} L${(this.width / 2)} ${(this.height / 2 - this.needleWidth / 2)} L${(this.width / 2 - this.middleRadius)} ${this.height / 2}z`;
+  this.element = options.containerId;
+  this.noColor = '#cdcdcd';
+  this.paths = [];
+  this.numMarkers = 61;
+  this.redMarkers = Math.floor(this.numMarkers * 0.8);
+  this.document = this.element.ownerDocument;
+  this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  this.svgNS = this.svg.namespaceURI;
+  this.needle = document.createElementNS(this.svgNS, 'path');
+  this.text = document.createElementNS(this.svgNS, 'text');
+  this.textNode = document.createTextNode('');
+  this.g = document.createElementNS(this.svgNS, 'g');
+  this.texts = [];
+  this.textNodes = [];
+  this.min = options.minValue || 0;
+  this.max = options.maxValue || 100;
+  this.middleCircleFillColor = options.backgroundColor || '#2a2a2a';
+  this.innerCircleFillColor = options.trimColor || '#660000';
+  this.circleStrokeColor = options.trimColor || '#660000';
+  this.needleColor = options.needleColor || '#da1b27';
+  this.markerBackgroundColor = options.markerBackgroundColor || '#2a2a2a';
+  this.normalColor = options.normalColor || 'green';
+  this.warningColor = options.warningColor || 'red';
 
   let circle;
   let mx;
@@ -54,9 +54,9 @@ function DialFullBasic(element, optionsString) {
 
   // Set up SVG
 
-  svg.setAttribute('width', width);
-  svg.setAttribute('height', height);
-  svg.setAttribute('viewBox', `${0} ${0} ${width} ${height}`);
+  this.svg.setAttribute('width', this.width);
+  this.svg.setAttribute('height', this.height);
+  this.svg.setAttribute('viewBox', `${0} ${0} ${this.width} ${this.height}`);
 
   // SVG Defs
 
@@ -64,121 +64,121 @@ function DialFullBasic(element, optionsString) {
 
   // Draw outer circle
 
-  circle = document.createElementNS(svgNS, 'circle');
-  circle.setAttribute('cx', width / 2);
-  circle.setAttribute('cy', height / 2);
-  circle.setAttribute('r', outerRadius);
-  circle.setAttribute('fill', markerBackgroundColor);
-  svg.appendChild(circle);
+  this.circle = document.createElementNS(this.svgNS, 'circle');
+  this.circle.setAttribute('cx', this.width / 2);
+  this.circle.setAttribute('cy', this.height / 2);
+  this.circle.setAttribute('r', this.outerRadius);
+  this.circle.setAttribute('fill', this.markerBackgroundColor);
+  this.svg.appendChild(this.circle);
 
   // Draw middle circle
 
-  circle = document.createElementNS(svgNS, 'circle');
-  circle.setAttribute('cx', width / 2);
-  circle.setAttribute('cy', height / 2);
-  circle.setAttribute('r', middleRadius);
-  circle.setAttribute('stroke', circleStrokeColor);
-  circle.setAttribute('stroke-width', strokeWidth);
-  circle.setAttribute('fill', middleCircleFillColor);
-  svg.appendChild(circle);
+  this.circle = document.createElementNS(this.svgNS, 'circle');
+  this.circle.setAttribute('cx', this.width / 2);
+  this.circle.setAttribute('cy', this.height / 2);
+  this.circle.setAttribute('r', this.middleRadius);
+  this.circle.setAttribute('stroke', this.circleStrokeColor);
+  this.circle.setAttribute('stroke-width', this.strokeWidth);
+  this.circle.setAttribute('fill', this.middleCircleFillColor);
+  this.svg.appendChild(this.circle);
 
   // Draw markers
 
-  g.setAttribute('id', 'markers');
-  for (let i = 0; i < numMarkers; i += 1) {
-    paths[i] = document.createElementNS(svgNS, 'path');
-    mx = Math.round((startMx + markerRadius
-      + markerRadius * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-    my = Math.trunc((startY
-      + markerRadius * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
+  this.g.setAttribute('id', 'markers');
+  for (let i = 0; i < this.numMarkers; i += 1) {
+    this.paths[i] = document.createElementNS(this.svgNS, 'path');
+    mx = Math.round((this.startMx + this.markerRadius
+      + this.markerRadius * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
+    my = Math.trunc((this.startY
+      + this.markerRadius * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
     if (i % 5 == 0) {
-      lx = Math.round((startLx + markerRadiusMajor
-        + markerRadiusMajor * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-      ly = Math.trunc((startY
-        + markerRadiusMajor * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
+      lx = Math.round((this.startLx + this.markerRadiusMajor
+        + this.markerRadiusMajor * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
+      ly = Math.trunc((this.startY
+        + this.markerRadiusMajor * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
     } else {
-      lx = Math.round((startLMinorx + markerRadiusMinor
-        + markerRadiusMinor * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-      ly = Math.trunc((startY
-        + markerRadiusMinor * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
+      lx = Math.round((this.startLMinorx + this.markerRadiusMinor
+        + this.markerRadiusMinor * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
+      ly = Math.trunc((this.startY
+        + this.markerRadiusMinor * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
     }
     pathString = `M ${mx} ${my} L${lx} ${ly}`;
-    paths[i].setAttribute('d', pathString);
-    paths[i].setAttribute('stroke', noColor);
-    paths[i].setAttribute('stroke-width', markerWidth);
-    g.appendChild(paths[i]);
+    this.paths[i].setAttribute('d', pathString);
+    this.paths[i].setAttribute('stroke', this.noColor);
+    this.paths[i].setAttribute('stroke-width', this.markerWidth);
+    this.g.appendChild(this.paths[i]);
 
     if (i % 5 == 0) {
-      tx = Math.round((startTx + textRadius
-        + textRadius * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-      ty = Math.trunc((startTy
-        + textRadius * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-      texts[i] = document.createElementNS(svgNS, 'text');
-      texts[i].setAttribute('id', `markerText ${i}`);
-      texts[i].setAttribute('x', tx);
-      texts[i].setAttribute('y', ty);
-      texts[i].setAttribute('font-size', 12);
-      texts[i].setAttribute('font-family', 'sans-serif');
-      texts[i].setAttribute('fill', 'black');
-      texts[i].setAttribute('stroke', 'white');
-      texts[i].setAttribute('text-anchor', 'middle');
-      texts[i].setAttribute('alignment-baseline', 'middle');
-      textNodes[i] = document.createTextNode('');
-      textNodes[i].nodeValue = min + i * (max - min) / (numMarkers - 1);
-      texts[i].appendChild(textNodes[i]);
-      g.appendChild(texts[i]);
+      tx = Math.round((this.startTx + this.textRadius
+        + this.textRadius * Math.cos(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
+      ty = Math.trunc((this.startTy
+        + this.textRadius * Math.sin(-Math.PI + 2 * Math.PI * (i + 1) / (this.numMarkers + 1))) * 100) / 100;
+      this.texts[i] = document.createElementNS(this.svgNS, 'text');
+      this.texts[i].setAttribute('id', `markerText ${i}`);
+      this.texts[i].setAttribute('x', tx);
+      this.texts[i].setAttribute('y', ty);
+      this.texts[i].setAttribute('font-size', 12);
+      this.texts[i].setAttribute('font-family', 'sans-serif');
+      this.texts[i].setAttribute('fill', 'black');
+      this.texts[i].setAttribute('stroke', 'white');
+      this.texts[i].setAttribute('text-anchor', 'middle');
+      this.texts[i].setAttribute('alignment-baseline', 'middle');
+      this.textNodes[i] = document.createTextNode('');
+      this.textNodes[i].nodeValue = this.min + i * (this.max - this.min) / (this.numMarkers - 1);
+      this.texts[i].appendChild(this.textNodes[i]);
+      this.g.appendChild(this.texts[i]);
     }
   }
-  svg.appendChild(g);
+  this.svg.appendChild(this.g);
 
   // Draw needle
 
-  needle.setAttribute('id', 'needle');
-  needle.setAttribute('d', needleString);
-  needle.setAttribute('fill', needleColor);
-  needle.setAttribute('stroke', 5);
-  svg.appendChild(needle);
+  this.needle.setAttribute('id', 'needle');
+  this.needle.setAttribute('d', this.needleString);
+  this.needle.setAttribute('fill', this.needleColor);
+  this.needle.setAttribute('stroke', 5);
+  this.svg.appendChild(this.needle);
 
   // Draw inner circle
 
-  circle = document.createElementNS(svgNS, 'circle');
-  circle.setAttribute('cx', width / 2);
-  circle.setAttribute('cy', height / 2);
-  circle.setAttribute('r', innerRadius);
-  circle.setAttribute('fill', innerCircleFillColor);
-  svg.appendChild(circle);
+  this.circle = document.createElementNS(this.svgNS, 'circle');
+  this.circle.setAttribute('cx', this.width / 2);
+  this.circle.setAttribute('cy', this.height / 2);
+  this.circle.setAttribute('r', this.innerRadius);
+  this.circle.setAttribute('fill', this.innerCircleFillColor);
+  this.svg.appendChild(this.circle);
 
   // Draw value
 
-  text.setAttribute('id', 'valueText');
-  text.setAttribute('x', '50%');
-  text.setAttribute('y', '50%');
-  text.setAttribute('font-size', 20);
-  text.setAttribute('font-family', 'sans-serif');
-  text.setAttribute('fill', 'white');
-  text.setAttribute('stroke', 'white');
-  text.setAttribute('text-anchor', 'middle');
-  text.setAttribute('alignment-baseline', 'middle');
-  text.appendChild(textNode);
-  svg.appendChild(text);
+  this.text.setAttribute('id', 'valueText');
+  this.text.setAttribute('x', '50%');
+  this.text.setAttribute('y', '50%');
+  this.text.setAttribute('font-size', 20);
+  this.text.setAttribute('font-family', 'sans-serif');
+  this.text.setAttribute('fill', 'white');
+  this.text.setAttribute('stroke', 'white');
+  this.text.setAttribute('text-anchor', 'middle');
+  this.text.setAttribute('alignment-baseline', 'middle');
+  this.text.appendChild(this.textNode);
+  this.svg.appendChild(this.text);
 
-  element.appendChild(svg);
+  this.element.appendChild(this.svg);
 }
 
 DialFullBasic.prototype.set = function(value) {
-  const angle = 360 * (value - min) / (max - min);
-  const colorMarkers = Math.floor(angle / 360 * numMarkers);
-  needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height / 2})`);
-  textNode.nodeValue = Math.floor(value);
-  for (let i = 0; i < numMarkers; i += 1) {
-    if (i <= colorMarkers) {
-      if (i >= redMarkers) {
-        paths[i].setAttribute('stroke', warningColor);
+  this.angle = 360 * (value - this.min) / (this.max - this.min);
+  this.colorMarkers = Math.floor(this.angle / 360 * this.numMarkers);
+  this.needle.setAttribute('transform', `rotate(${this.angle}, ${this.width / 2}, ${this.height / 2})`);
+  this.textNode.nodeValue = Math.floor(value);
+  for (let i = 0; i < this.numMarkers; i += 1) {
+    if (i <= this.colorMarkers) {
+      if (i >= this.redMarkers) {
+        this.paths[i].setAttribute('stroke', this.warningColor);
       } else {
-        paths[i].setAttribute('stroke', normalColor);
+        this.paths[i].setAttribute('stroke', this.normalColor);
       }
     } else {
-      paths[i].setAttribute('stroke', noColor);
+      this.paths[i].setAttribute('stroke', this.noColor);
     }
   }
 };
