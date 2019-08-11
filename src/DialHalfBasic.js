@@ -1,40 +1,39 @@
-function DialHalfBasic() {
-  this.init = function init(options) {
+function DialHalfBasic(options) {
     const strokeWidth = 2;
     const needleWidth = 6;
     const markerWidth = 3;
     const numMarkers = 61;
     const redMarkers = Math.floor(numMarkers * 0.8);
     const noColor = '#cdcdcd';
-    const width = 300;
-    const height = width / 2;
-    const outerRadius = width / 2 * 0.95;
-    const middleRadius = width / 2 * 0.75;
-    const innerRadius = width / 2 * 0.25;
+    this.width = 300;
+    this.height = this.width / 2;
+    const outerRadius = this.width / 2 * 0.95;
+    const middleRadius = this.width / 2 * 0.75;
+    const innerRadius = this.width / 2 * 0.25;
     const markerRadius = middleRadius * 1.07;
     const markerRadiusMajor = middleRadius * 1.20;
     const markerRadiusMinor = middleRadius * 1.13;
     const textRadius = middleRadius * 0.9;
-    const startMx = (width - markerRadius * 2) / 2;
-    const startY = height;
-    const startLx = (width - markerRadiusMajor * 2) / 2;
-    const startLMinorx = (width - markerRadiusMinor * 2) / 2;
-    const startTx = (width - textRadius * 2) / 2;
-    const startTy = height;
+    const startMx = (this.width - markerRadius * 2) / 2;
+    const startY = this.height;
+    const startLx = (this.width - markerRadiusMajor * 2) / 2;
+    const startLMinorx = (this.width - markerRadiusMinor * 2) / 2;
+    const startTx = (this.width - textRadius * 2) / 2;
+    const startTy = this.height;
     const paths = [];
-    const needleString = `M ${(width / 2)} ${(height + needleWidth / 2)} L${(width / 2)} ${(height - needleWidth / 2)} L${(width / 2 - middleRadius)} ${height}z`;
+    const needleString = `M ${(this.width / 2)} ${(this.height + needleWidth / 2)} L${(this.width / 2)} ${(this.height - needleWidth / 2)} L${(this.width / 2 - middleRadius)} ${this.height}z`;
     const element = options.containerId;
     const document = element.ownerDocument;
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const svgNS = svg.namespaceURI;
-    const needle = document.createElementNS(svgNS, 'path');
-    const valueText = document.createElementNS(svgNS, 'text');
-    const valueTextNode = document.createTextNode('');
-    const g = document.createElementNS(svgNS, 'g');
+    this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    this.svgNS = this.svg.namespaceURI;
+    this.needle = document.createElementNS(this.svgNS, 'path');
+    this.valueText = document.createElementNS(this.svgNS, 'text');
+    this.valueTextNode = document.createTextNode('');
+    this.g = document.createElementNS(this.svgNS, 'g');
     const texts = [];
     const textNodes = [];
-    const min = options.minValue || 0;
-    const max = options.maxValue || 100;
+    this.min = options.minValue || 0;
+    this.max = options.maxValue || 100;
     const middleCircleFillColor = options.backgroundColor || '#2a2a2a';
     const innerCircleFillColor = options.trimColor || '#660000';
     const circleStrokeColor = options.trimColor || '#660000';
@@ -55,9 +54,9 @@ function DialHalfBasic() {
 
     // Set up SVG
 
-    svg.setAttribute('width', width);
-    svg.setAttribute('height', height);
-    svg.setAttribute('viewBox', `${0} ${0} ${width} ${height}`);
+    this.svg.setAttribute('width', this.width);
+    this.svg.setAttribute('height', this.height);
+    this.svg.setAttribute('viewBox', `${0} ${0} ${this.width} ${this.height}`);
 
     // SVG Defs
 
@@ -65,29 +64,29 @@ function DialHalfBasic() {
 
     // Draw outer circle
 
-    circle = document.createElementNS(svgNS, 'circle');
-    circle.setAttribute('cx', width / 2);
-    circle.setAttribute('cy', height);
-    circle.setAttribute('r', outerRadius);
-    circle.setAttribute('fill', markerBackgroundColor);
-    svg.appendChild(circle);
+    this.circle = document.createElementNS(this.svgNS, 'circle');
+    this.circle.setAttribute('cx', this.width / 2);
+    this.circle.setAttribute('cy', this.height);
+    this.circle.setAttribute('r', outerRadius);
+    this.circle.setAttribute('fill', markerBackgroundColor);
+    this.svg.appendChild(this.circle);
 
     // Draw middle circle
 
-    circle = document.createElementNS(svgNS, 'circle');
-    circle.setAttribute('cx', width / 2);
-    circle.setAttribute('cy', height);
-    circle.setAttribute('r', middleRadius);
-    circle.setAttribute('stroke', circleStrokeColor);
-    circle.setAttribute('stroke-width', strokeWidth);
-    circle.setAttribute('fill', middleCircleFillColor);
-    svg.appendChild(circle);
+    this.circle = document.createElementNS(this.svgNS, 'circle');
+    this.circle.setAttribute('cx', this.width / 2);
+    this.circle.setAttribute('cy', this.height);
+    this.circle.setAttribute('r', middleRadius);
+    this.circle.setAttribute('stroke', circleStrokeColor);
+    this.circle.setAttribute('stroke-width', strokeWidth);
+    this.circle.setAttribute('fill', middleCircleFillColor);
+    this.svg.appendChild(this.circle);
 
     // Draw markers
 
-    g.setAttribute('id', 'markers');
+    this.g.setAttribute('id', 'markers');
     for (let i = 0; i < numMarkers; i += 1) {
-      paths[i] = document.createElementNS(svgNS, 'path');
+      paths[i] = document.createElementNS(this.svgNS, 'path');
       mx = Math.round((startMx + markerRadius
         + markerRadius * Math.cos(-Math.PI + Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
       my = Math.trunc((startY
@@ -107,14 +106,14 @@ function DialHalfBasic() {
       paths[i].setAttribute('d', pathString);
       paths[i].setAttribute('stroke', noColor);
       paths[i].setAttribute('stroke-width', markerWidth);
-      g.appendChild(paths[i]);
+      this.g.appendChild(paths[i]);
 
       if (i % 5 == 0) {
         tx = Math.round((startTx + textRadius
           + textRadius * Math.cos(-Math.PI + Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
         ty = Math.trunc((startTy
           + textRadius * Math.sin(-Math.PI + Math.PI * (i + 1) / (numMarkers + 1))) * 100) / 100;
-        texts[i] = document.createElementNS(svgNS, 'text');
+        texts[i] = document.createElementNS(this.svgNS, 'text');
         texts[i].setAttribute('id', `markerText ${i}`);
         texts[i].setAttribute('x', tx);
         texts[i].setAttribute('y', ty);
@@ -125,64 +124,64 @@ function DialHalfBasic() {
         texts[i].setAttribute('text-anchor', 'middle');
         texts[i].setAttribute('alignment-baseline', 'middle');
         textNodes[i] = document.createTextNode('');
-        textNodes[i].nodeValue = min + i * (max - min) / (numMarkers - 1);
+        textNodes[i].nodeValue = this.min + i * (this.max - this.min) / (numMarkers - 1);
         texts[i].appendChild(textNodes[i]);
-        g.appendChild(texts[i]);
+        this.g.appendChild(texts[i]);
       }
     }
-    svg.appendChild(g);
+    this.svg.appendChild(this.g);
 
     // Draw needle
 
-    needle.setAttribute('id', 'needle');
-    needle.setAttribute('d', needleString);
-    needle.setAttribute('fill', needleColor);
-    needle.setAttribute('stroke', 5);
-    svg.appendChild(needle);
+    this.needle.setAttribute('id', 'needle');
+    this.needle.setAttribute('d', needleString);
+    this.needle.setAttribute('fill', needleColor);
+    this.needle.setAttribute('stroke', 5);
+    this.svg.appendChild(this.needle);
 
     // Draw inner circle
 
-    circle = document.createElementNS(svgNS, 'circle');
-    circle.setAttribute('cx', width / 2);
-    circle.setAttribute('cy', height);
-    circle.setAttribute('r', innerRadius);
-    circle.setAttribute('fill', innerCircleFillColor);
-    svg.appendChild(circle);
+    this.circle = document.createElementNS(this.svgNS, 'circle');
+    this.circle.setAttribute('cx', this.width / 2);
+    this.circle.setAttribute('cy', this.height);
+    this.circle.setAttribute('r', innerRadius);
+    this.circle.setAttribute('fill', innerCircleFillColor);
+    this.svg.appendChild(this.circle);
 
     // Draw value text
 
-    valueText.setAttribute('id', 'valueText');
-    valueText.setAttribute('x', '50%');
-    valueText.setAttribute('y', height * 0.94);
-    valueText.setAttribute('font-size', 20);
-    valueText.setAttribute('font-family', 'sans-serif');
-    valueText.setAttribute('fill', 'white');
-    valueText.setAttribute('stroke', 'white');
-    valueText.setAttribute('text-anchor', 'middle');
-    valueText.setAttribute('alignment-baseline', 'middle');
-    valueText.appendChild(valueTextNode);
-    svg.appendChild(valueText);
+    this.valueText.setAttribute('id', 'valueText');
+    this.valueText.setAttribute('x', '50%');
+    this.valueText.setAttribute('y', this.height * 0.94);
+    this.valueText.setAttribute('font-size', 20);
+    this.valueText.setAttribute('font-family', 'sans-serif');
+    this.valueText.setAttribute('fill', 'white');
+    this.valueText.setAttribute('stroke', 'white');
+    this.valueText.setAttribute('text-anchor', 'middle');
+    this.valueText.setAttribute('alignment-baseline', 'middle');
+    this.valueText.appendChild(this.valueTextNode);
+    this.svg.appendChild(this.valueText);
 
-    element.appendChild(svg);
-  }
-
-  this.set = function set(value) {
-    const angle = 180 * (value - min) / (max - min);
-    const colorMarkers = Math.floor(angle / 180 * numMarkers);
-    needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height})`);
-    valueTextNode.nodeValue = Math.floor(value);
-    for (let i = 0; i < numMarkers; i += 1) {
-      if (i <= colorMarkers) {
-        if (i >= redMarkers) {
-          paths[i].setAttribute('stroke', warningColor);
-        } else {
-          paths[i].setAttribute('stroke', normalColor);
-        }
-      } else {
-        paths[i].setAttribute('stroke', noColor);
-      }
-    }
-  };
+    element.appendChild(this.svg);
 }
+
+DialHalfBasic.prototype.set = function(value) {
+  this.angle = 180 * (value - this.min) / (this.max - this.min);
+  const colorMarkers = Math.floor(this.angle / 180 * this.numMarkers);
+
+  this.needle.setAttribute('transform', `rotate(${this.angle}, ${this.width / 2}, ${this.height})`);
+  this.valueTextNode.nodeValue = Math.floor(value);
+  for (let i = 0; i < this.numMarkers; i += 1) {
+    if (i <= this.colorMarkers) {
+      if (i >= this.redMarkers) {
+        this.paths[i].setAttribute('stroke', this.warningColor);
+      } else {
+        this.paths[i].setAttribute('stroke', this.normalColor);
+      }
+    } else {
+      this.paths[i].setAttribute('stroke', this.noColor);
+    }
+  }
+};
 
 module.exports = DialHalfBasic;

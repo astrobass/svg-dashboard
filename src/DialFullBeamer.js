@@ -1,4 +1,4 @@
-function DialFullBasic(element, optionsString) {
+function DialFullBeamer(element, optionsString) {
   const options = JSON.parse(optionsString);
   const range = options.range || [0, 100];
   const angleRange = options.angleRange || [0, 360];
@@ -247,15 +247,16 @@ function DialFullBasic(element, optionsString) {
   //svg.appendChild(gGlass);
 
   element.appendChild(svg);
-
-  this.set = function set(value) {
-    texts[prevTextIndex].setAttribute('font-size', markerFontSize);
-    textIndex = 5 * Math.round(numMarkers * (value - range[0]) / (range[1] - range[0]) / 5);
-    prevTextIndex = textIndex;
-    texts[textIndex].setAttribute('font-size', Math.floor(markerFontSize * 1.6));
-    const angle = angleRange[0] + (angleRange[1] - angleRange[0]) * (value - range[0])
-      / (range[1] - range[0]);
-    needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height / 2})`);
-  };
 }
-export default DialFullBasic;
+
+DialFullBeamer.set = function(value) {
+  texts[prevTextIndex].setAttribute('font-size', markerFontSize);
+  textIndex = 5 * Math.round(numMarkers * (value - range[0]) / (range[1] - range[0]) / 5);
+  prevTextIndex = textIndex;
+  texts[textIndex].setAttribute('font-size', Math.floor(markerFontSize * 1.6));
+  const angle = angleRange[0] + (angleRange[1] - angleRange[0]) * (value - range[0])
+    / (range[1] - range[0]);
+  needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height / 2})`);
+};
+
+module.exports = DialFullBeamer;

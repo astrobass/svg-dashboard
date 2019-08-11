@@ -2,31 +2,12 @@
   "name": "svg-controls",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "scripts": {
-    "start": "http-server",
-    "build": "webpack --progress --mode=development",
-    "watch": "webpack --progress --watch --mode=development",
-    "server": "webpack-dev-server --open --mode=development",
-    "copy": "rm ./dist/*; cp ./src/* ./dist/",
-    "build-test": "webpack --progress --mode=development --config=webpack.test.config.js",
-    "test": "webpack-dev-server --open --mode=development --config=webpack.test.config.js"
+    "start": "webpack-dev-server --inline --watch",
+    "dev": "webpack --mode=development"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/preset-env": "^7.1.5",
-    "babel-loader": "^8.0.4",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "html-webpack-plugin": "^3.2.0",
-    "http-server": "^0.11.1",
-    "uglify-es": "^3.3.9",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
-  }
+  "license": "ISC"
 }

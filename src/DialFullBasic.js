@@ -163,23 +163,24 @@ function DialFullBasic(element, optionsString) {
   svg.appendChild(text);
 
   element.appendChild(svg);
-
-  this.set = function set(value) {
-    const angle = 360 * (value - min) / (max - min);
-    const colorMarkers = Math.floor(angle / 360 * numMarkers);
-    needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height / 2})`);
-    textNode.nodeValue = Math.floor(value);
-    for (let i = 0; i < numMarkers; i += 1) {
-      if (i <= colorMarkers) {
-        if (i >= redMarkers) {
-          paths[i].setAttribute('stroke', warningColor);
-        } else {
-          paths[i].setAttribute('stroke', normalColor);
-        }
-      } else {
-        paths[i].setAttribute('stroke', noColor);
-      }
-    }
-  };
 }
-export default DialFullBasic;
+
+DialFullBasic.prototype.set = function(value) {
+  const angle = 360 * (value - min) / (max - min);
+  const colorMarkers = Math.floor(angle / 360 * numMarkers);
+  needle.setAttribute('transform', `rotate(${angle}, ${width / 2}, ${height / 2})`);
+  textNode.nodeValue = Math.floor(value);
+  for (let i = 0; i < numMarkers; i += 1) {
+    if (i <= colorMarkers) {
+      if (i >= redMarkers) {
+        paths[i].setAttribute('stroke', warningColor);
+      } else {
+        paths[i].setAttribute('stroke', normalColor);
+      }
+    } else {
+      paths[i].setAttribute('stroke', noColor);
+    }
+  }
+};
+
+module.exports = DialFullBasic;
