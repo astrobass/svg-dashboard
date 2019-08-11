@@ -39,15 +39,40 @@
     </div>
     <div class="dash-container">
       <div class="dash-column">
-        <div class="dial-full" id="dial3-div"></div>
+        <div class="dial-full" id="dial3-div" dash-options='{
+        "minValue": 0,
+        "maxValue": 120,
+        "backgroundColor": "darkblue",
+        "trimColor": "darkred",
+        "needleColor": "darkred",
+        "markerBackgroundColor": "#333333",
+        "normalColor": "green",
+        "warningColor": "red"
+      }'></div>
       </div>
       <div class="dash-column">
-        <div class="dial-full" id="dial4-div"></div>
+        <div class="dial-full" id="dial4-div" dash-options='{
+        "minValue": 0,
+        "maxValue": 120,
+        "backgroundColor": "darkblue",
+        "trimColor": "darkred",
+        "needleColor": "darkred",
+        "markerBackgroundColor": "#333333",
+        "normalColor": "green",
+        "warningColor": "red"
+      }'></div>
       </div>
     </div>
     <div class="dash-container">
       <div class="dash-column">
-        <div class="dial-full-beamer" id="dial5-div"></div>
+        <div class="dial-full-beamer" id="dial5-div" dash-options='{
+        "range": [0, 120],
+        "angleRange": [-30, 210],
+        "backgroundColor": [20, 20, 20],
+        "foregroundColor": [150, 150, 255],
+        "brightness": 0.9,
+        "diameter": 400
+      }'></div>
       </div>
       <div class="dash-column">
         <div class="dial-full-beamer" id="dial6-div" dash-options='{
