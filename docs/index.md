@@ -85,7 +85,7 @@
       }'></div>
       </div>
     </div>
-    <script src="dist/svgdash.js"></script>
-    <script src="dist/index.js"></script>
+    <script src="svgdash.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
