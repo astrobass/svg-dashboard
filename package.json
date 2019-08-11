@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --inline --watch",
-    "dev": "webpack --mode=development"
+    "dev": "webpack --mode=development",
+    "prod": "webpack --mode=production"
   },
   "keywords": [],
   "author": "",
